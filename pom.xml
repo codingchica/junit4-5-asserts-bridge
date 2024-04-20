@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.codingchica</groupId>
+    <artifactId>junit4-5-asserts-bridge</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>junit4-5-asserts-bridge</name>
+    <description>A simple junit4-5-asserts-bridge.</description>
+    <url>https://github.com/codingchica/junit4-5-asserts-bridge</url>
+
+    <licenses>
+        <license>
+            <name>Eclipse Public License 2.0</name>
+            <url>https://www.eclipse.org/org/documents/epl-2.0/EPL-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>codingchica</id>
+            <organizationUrl>https://github.com/codingchica/</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git|https://github.com/codingchica/junit4-5-asserts-bridge.git</connection>
+        <developerConnection>scm:git|https://github.com/codingchica/junit4-5-asserts-bridge.git</developerConnection>
+        <url>https://github.com/codingchica/junit4-5-asserts-bridge</url>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/codingchica/junit4-5-asserts-bridge/issues</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>github actions</system>
+        <url>https://github.com/codingchica/junit4-5-asserts-bridge/actions/workflows/maven.yml</url>
+    </ciManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <properties>
+        <!--
+    argLine will be extended by jacoco-maven-plugin.
+    Additional argLine values for maven-surefire-plugin can be set here.
+    -->
+        <argLine/>
+
+        <findsecbugs.plugin.version>1.12.0</findsecbugs.plugin.version>
+
+        <jacoco.maven.plugin.version>0.8.10</jacoco.maven.plugin.version>
+        <java.version>17</java.version>
+        <junit.jupiter.version>5.9.1</junit.jupiter.version>
+        <junit.platform.version>1.9.1</junit.platform.version>
+
+        <maven.checkstyle.plugin.version>3.2.1</maven.checkstyle.plugin.version>
+        <maven.clean.plugin.version>3.3.2</maven.clean.plugin.version>
+        <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.deploy.plugin.version>2.8.2</maven.deploy.plugin.version>
+        <maven.enforcer.plugin.version>3.2.1</maven.enforcer.plugin.version>
+        <maven.install.plugin.version>3.1.0</maven.install.plugin.version>
+        <maven.jar.plugin.version>3.3.0</maven.jar.plugin.version>
+        <maven.javadoc.plugin.version>3.5.0</maven.javadoc.plugin.version>
+        <maven.jxr.plugin.version>3.3.0</maven.jxr.plugin.version>
+        <maven.pmd.plugin.version>3.21.0</maven.pmd.plugin.version>
+        <maven.project.info.reports.plugin.version>3.4.1</maven.project.info.reports.plugin.version>
+        <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
+        <maven.site.plugin.version>4.0.0-M13</maven.site.plugin.version>
+        <maven.source.plugin.version>3.3.1</maven.source.plugin.version>
+        <maven.surefire.plugin.version>3.0.0</maven.surefire.plugin.version>
+
+        <nexus.staging.maven.plugin.version>1.6.7</nexus.staging.maven.plugin.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!--
+    Since these properties are needed for both build and reporting spotbugs configuration,
+    defining as properties for easier maintenance.
+    -->
+        <spotbugs.effort>Max</spotbugs.effort>
+        <spotbugs.excludeFilterFile>build_config/spotbugs-exclude.xml</spotbugs.excludeFilterFile>
+        <spotbugs.failThreshold>Low</spotbugs.failThreshold>
+        <spotbugs.includeFilterFile>build_config/spotbugs-include.xml</spotbugs.includeFilterFile>
+        <spotbugs.includeTests>true</spotbugs.includeTests>
+        <spotbugs.plugin.version>4.8.4.0</spotbugs.plugin.version>
+
+        <spotless.maven.plugin.version>2.35.0</spotless.maven.plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <!-- https://github.com/junit-team/junit5/tree/main/junit-jupiter-engine -->
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.jupiter.version}</version>
+        </dependency>
+        <dependency>
+            <!-- https://github.com/junit-team/junit5/tree/main/junit-jupiter-api -->
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.jupiter.version}</version>
+        </dependency>
+        <dependency>
+            <!-- https://github.com/junit-team/junit5/tree/main/junit-jupiter-params -->
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit.jupiter.version}</version>
+        </dependency>
+        <dependency>
+            <!-- https://github.com/junit-team/junit5/tree/main/junit-platform-suite -->
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <version>${junit.platform.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+            <plugins>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${maven.clean.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven.site.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>${maven.project.info.reports.plugin.version}</version>
+                </plugin>
+                <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven.resources.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <!-- https://maven.apache.org/plugins/maven-javadoc-plugin/ -->
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven.javadoc.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven.jar.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven.install.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven.deploy.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <!-- https://spotbugs.github.io/spotbugs-maven-plugin/usage.html -->
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>${spotbugs.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven.source.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <!-- static code analysis quality gates and reports -->
+                    <!-- https://maven.apache.org/plugins/maven-pmd-plugin/usage.html -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>${maven.pmd.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <!-- https://central.sonatype.org/publish/publish-maven/#distribution-management-and-authentication -->
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>${nexus.staging.maven.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <!-- https://central.sonatype.org/publish/publish-maven/#distribution-management-and-authentication -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.5</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <configuration>
+                    <!-- see also properties configured with spotbugs prefix -->
+                    <plugins>
+                        <plugin>
+                            <!-- https://find-sec-bugs.github.io/bugs.htm -->
+                            <groupId>com.h3xstream.findsecbugs</groupId>
+                            <artifactId>findsecbugs-plugin</artifactId>
+                            <version>${findsecbugs.plugin.version}</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>static-code-analysis</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- argLine will be set by jacoco-maven-plugin -->
+                    <argLine>${argLine}</argLine>
+                    <parallel>all</parallel>
+                    <runOrder>random</runOrder>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <!--
+        https://www.eclemma.org/jacoco/trunk/doc/maven.html
+        https://www.eclemma.org/jacoco/trunk/doc/integrations.html
+        -->
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>prepare-ut</id>
+                        <goals>
+                            <!-- binds by default to the 'initialize' Maven lifecycle phase -->
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report-ut</id>
+                        <goals>
+                            <!-- binds by default to the 'verify' Maven lifecycle phase -->
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/ut-code-coverage</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>check-ut</id>
+                        <goals>
+                            <!-- binds by default to the 'verify' Maven lifecycle phase -->
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <!-- Build breaker rules to enforce in order to get a successful build -->
+                                <rule>
+                                    <!-- In the overall project. -->
+                                    <element>BUNDLE</element>
+                                    <limits>
+                                        <limit>
+                                            <!-- Individual instruction / command count (isn't impacted by formatting / line wrapping). -->
+                                            <counter>INSTRUCTION</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <!-- As this is a bridge, it should have none of its own logic - all instructions should be covered. -->
+                                            <!-- TODO - The fail methods are tested, but not showing up in JaCoCo as run - confirmed tests in build file -->
+                                            <minimum>0.90</minimum>
+                                        </limit>
+                                        <limit>
+                                            <!-- Branches of logic are things like individual true/false tests in an if / else / switch statement.  -->
+                                            <counter>BRANCH</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <!-- As this is a bridge, it should have none of its own logic - all instructions should be covered. -->
+                                            <minimum>1.0</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <!-- Source code cross-reference pages, also used for other reports. -->
+                <!-- https://maven.apache.org/jxr/maven-jxr-plugin/usage.html -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>${maven.jxr.plugin.version}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                        <phase>verify</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <!-- https://github.com/diffplug/spotless/tree/main/plugin-maven -->
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>${spotless.maven.plugin.version}</version>
+                <inherited>true</inherited>
+                <configuration>
+                    <markdown>
+                        <includes>
+                            <!-- You have to set the target manually -->
+                            <include>**/*.md</include>
+                        </includes>
+                        <flexmark/>
+                    </markdown>
+                    <java>
+                        <!-- Cleanthat will refactor your code, but it may break your style: apply it before your formatter -->
+                        <cleanthat/>
+
+                        <googleJavaFormat>
+                            <!-- GOOGLE or AOSP (optional) -->
+                            <!-- https://github.com/google/google-java-format -->
+                            <style>GOOGLE</style>
+                            <!-- optional (requires at least 1.8) -->
+                            <reflowLongStrings>true</reflowLongStrings>
+                        </googleJavaFormat>
+
+                        <!-- standard import order -->
+                        <importOrder/>
+
+                        <!-- Removing unused imports at the top of each file. -->
+                        <removeUnusedImports/>
+
+                        <!-- Fixes formatting of type annotations that may have occurred earlier in the formatting process. -->
+                        <formatAnnotations/>
+                    </java>
+                    <pom>
+                        <!-- These are the defaults, you can override if you want -->
+                        <includes>
+                            <include>pom.xml</include>
+                        </includes>
+
+                        <sortPom>
+                            <!-- The encoding of the pom files -->
+                            <encoding>UTF-8</encoding>
+                            <!-- Should empty elements be expanded-->
+                            <expandEmptyElements>false</expandEmptyElements>
+                            <!-- Should a space be added inside self-closing elements-->
+                            <spaceBeforeCloseEmptyElement>false</spaceBeforeCloseEmptyElement>
+                            <!-- Keep empty lines -->
+                            <keepBlankLines>true</keepBlankLines>
+                            <!-- Indentation -->
+                            <nrOfIndentSpace>4</nrOfIndentSpace>
+                            <!-- Should empty lines be indented -->
+                            <indentBlankLines>false</indentBlankLines>
+                            <!-- Should schema locations be indented -->
+                            <indentSchemaLocation>true</indentSchemaLocation>
+                            <!--
+              Sort order of elements: https://github.com/Ekryd/sortpom/wiki/PredefinedSortOrderProfiles
+              recommended_2008_06 - The POM Code Convention that was chosen by Maven developers in 2008 (default for 3.0.0+)
+              -->
+                            <predefinedSortOrder>recommended_2008_06</predefinedSortOrder>
+                            <!-- Sort dependency exclusions: https://github.com/Ekryd/sortpom/wiki/SortDependencies-->
+                            <sortDependencyExclusions/>
+                            <!-- Sort properties -->
+                            <sortProperties>true</sortProperties>
+                            <!-- Sort plugin executions -->
+                            <sortExecutions>false</sortExecutions>
+                        </sortPom>
+                    </pom>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>auto-style</id>
+                        <goals>
+                            <goal>apply</goal>
+                        </goals>
+                        <!-- Using validate phase, so this happens before enforce-style -->
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <configuration>
+                    <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+                    <targetJdk>${maven.compiler.target}</targetJdk>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!-- Checking for coding issues in main files. -->
+                        <id>pmd-main</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <phase>verify</phase>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <includeTests>false</includeTests>
+                            <rulesets>
+                                <ruleset>build_config/pmd-rules-main.xml</ruleset>
+                            </rulesets>
+                            <excludeFromFailureFile>build_config/pmd-exclude-pmd-check.properties</excludeFromFailureFile>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <!-- Checking for coding issues in test files. -->
+                        <id>cpd-main</id>
+                        <goals>
+                            <goal>cpd-check</goal>
+                        </goals>
+                        <phase>verify</phase>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <includeTests>false</includeTests>
+                            <rulesets>
+                                <ruleset>build_config/pmd-rules-main.xml</ruleset>
+                            </rulesets>
+                            <excludeFromFailureFile>build_config/pmd-exclude-cpd-check.properties</excludeFromFailureFile>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <!-- Checking for code duplication (copy-paste detector) in main files. -->
+                        <id>pmd-test</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <phase>verify</phase>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <includeTests>true</includeTests>
+                            <excludeRoots>
+                                <excludeRoot>${basedir}/src/main/java</excludeRoot>
+                            </excludeRoots>
+                            <rulesets>
+                                <ruleset>build_config/pmd-rules-test.xml</ruleset>
+                            </rulesets>
+                            <excludeFromFailureFile>build_config/pmd-exclude-pmd-check.properties</excludeFromFailureFile>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <!-- Checking for code duplication (copy-paste detector) in test files. -->
+                        <id>cpd-test</id>
+                        <goals>
+                            <goal>cpd-check</goal>
+                        </goals>
+                        <phase>verify</phase>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <includeTests>true</includeTests>
+                            <excludeRoots>
+                                <excludeRoot>${basedir}/src/main/java</excludeRoot>
+                            </excludeRoots>
+                            <rulesets>
+                                <ruleset>build_config/pmd-rules-test.xml</ruleset>
+                            </rulesets>
+                            <excludeFromFailureFile>build_config/pmd-exclude-cpd-check.properties</excludeFromFailureFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <!-- https://maven.apache.org/plugins/maven-javadoc-plugin/ -->
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <inherited>true</inherited>
+                <configuration>
+                    <failOnError>true</failOnError>
+                    <failOnWarnings>true</failOnWarnings>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <!-- The version is defined in the Build Plugin Management section. Also included by default. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <!-- Source code cross-reference pages, also used for other reports. -->
+                <!-- https://maven.apache.org/jxr/maven-jxr-plugin/usage.html -->
+                <!-- The version is defined in the Build Plugin Management section. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <!-- https://spotbugs.github.io/spotbugs-maven-plugin/usage.html -->
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <configuration>
+                    <!-- see also properties configured with spotbugs prefix -->
+                    <plugins>
+                        <plugin>
+                            <!-- https://find-sec-bugs.github.io/bugs.htm -->
+                            <groupId>com.h3xstream.findsecbugs</groupId>
+                            <artifactId>findsecbugs-plugin</artifactId>
+                            <version>${findsecbugs.plugin.version}</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <configuration>
+                    <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+                    <targetJdk>${maven.compiler.target}</targetJdk>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <!-- https://central.sonatype.org/publish/publish-maven/#distribution-management-and-authentication -->
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <!-- https://central.sonatype.org/publish/publish-maven/#distribution-management-and-authentication -->
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <phase>verify</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
