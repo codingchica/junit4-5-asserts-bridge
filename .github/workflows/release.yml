@@ -1,0 +1,42 @@
+# This workflow will build a Java project with Maven, deploy/publish built artifacts.
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-maven
+
+name: Publish package to the Maven Central Repository
+
+# When to perform the build action.
+on:
+  release:
+    # When a new release is created in GitHub
+    types: [created]
+
+# What will be done as part of this action.
+jobs:
+  publish:
+  
+    # Default version - Linux servers.  Shouldn't matter for this project.
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the code from the source code repository.
+      - uses: actions/checkout@v4
+          
+      # Setup the desired Java version in the environment with a Maven local 
+      # cache of dependencies (better build performance).  
+      # Updates settings.xml to expect an environment variable for server 
+      # authentication details.
+      - name: Set up Java and Maven Central Repository
+        uses: actions/setup-java@v4
+        with:
+          cache: maven
+          java-version: '17'
+          distribution: 'temurin'
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+
+          
+    # Perform the Maven build and site generation locally.  Deploy artifacts to ossrh server.
+      - name: Publish package
+        run: mvn -P release --batch-mode site deploy
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
