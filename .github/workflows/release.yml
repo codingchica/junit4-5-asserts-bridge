@@ -32,8 +32,7 @@ jobs:
           server-id: ossrh
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
-          gpg-private-key: ${{ secrets.GPG_SIGNING_KEY }} # Value of the GPG private key to import
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE # env variable for GPG private key passphrase
+          gpg-private-key: MAVEN_GPG_PRIVATE_KEY
           
     # Perform the Maven build and site generation locally.  Deploy artifacts to ossrh server.
       - name: Publish package
@@ -41,4 +40,4 @@ jobs:
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-          MAVEN_GPG_PASSPHRASE : ${{ secrets.GPG_SIGNING_KEY }}
+          MAVEN_GPG_PRIVATE_KEY : ${{ secrets.GPG_SIGNING_KEY }}
