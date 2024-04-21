@@ -569,6 +569,8 @@
                       <configuration>
                         <publishingServerId>central</publishingServerId>
                         <tokenAuth>true</tokenAuth>
+                        <checksums>none</checksums>
+                        <waitUntil>validated</waitUntil>
                       </configuration>
                     </plugin>
                     <plugin>
