@@ -27,19 +27,29 @@ jobs:
     steps:
     # Checkout the code from the source code repository.
     - uses: actions/checkout@v4
-    
+
     # Setup the desired Java version in the environment with a Maven local 
-    # cache of dependencies (better build performance)
-    - name: Set up JDK 17
+    # cache of dependencies (better build performance).  
+    # Updates settings.xml to expect an environment variable for server 
+    # authentication details.
+    - name: Set up Java and Maven Central Repository
       uses: actions/setup-java@v4
       with:
+        cache: maven
         java-version: '17'
         distribution: 'temurin'
-        cache: maven
-        
-    # Perform the Maven build and site generation locally.  No artifacts are deployed
+        server-id: ossrh
+        server-username: MAVEN_USERNAME
+        server-password: MAVEN_PASSWORD
+        gpg-private-key: MAVEN_GPG_PRIVATE_KEY
+          
+  # Perform the Maven build and site generation locally.  Deploy artifacts to ossrh server.
     - name: Build with Maven
-      run: mvn -B site package --file pom.xml
+      run: mvn -P release --batch-mode site package
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        MAVEN_GPG_PRIVATE_KEY : ${{ secrets.GPG_SIGNING_KEY }}
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     # - name: Update dependency graph
