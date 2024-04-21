@@ -33,6 +33,14 @@ jobs:
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
           
+      - id: install-secret-key
+        name: Install gpg secret key
+        run: |
+          # Install gpg secret key
+          cat <(echo -e "${{ secrets.GPG_SIGNING_KEY }}") | gpg --batch --import
+          # Verify gpg secret key
+          gpg --list-secret-keys --keyid-format LONG
+        
     # Perform the Maven build and site generation locally.  Deploy artifacts to ossrh server.
       - name: Publish package
         run: mvn -P release --batch-mode site deploy
