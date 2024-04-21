@@ -32,30 +32,6 @@ jobs:
           server-id: ossrh
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
-
-      # Increment the patch version in the repo, so that all uploads have a unique version
-      - name: Increment Patch Version
-        env:
-          GITHUB_USERNAME: ${{ secrets.GitHubUserName }}
-          GITHUB_EMAIL: ${{ secrets.GitHubEmail }}
-        run: |
-          ./mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit
-          git config user.name "${GITHUB_USERNAME}"
-          git config user.email "${GITHUB_EMAIL}"
-          git commit -m "updated version in pom.xml"
-          git push
-          
-      # Add a tag to the current version for easier searching.
-      - name: Add Tag
-        env:
-          GITHUB_USERNAME: ${{ secrets.GitHubUserName }}
-          GITHUB_EMAIL: ${{ secrets.GitHubEmail }}
-        run: |
-          export version=$(./mvn help:evaluate -Dexpression=project.version -q -DforceStdout')
-          git config user.name "${GITHUB_USERNAME}"
-          git config user.email "${GITHUB_EMAIL}"
-          git tag -a $version -m "$version"
-          git push origin $version
           
     # Perform the Maven build and site generation locally.  Deploy artifacts to ossrh server.
       - name: Publish package
