@@ -5,7 +5,7 @@
 
     <groupId>com.codingchica</groupId>
     <artifactId>junit4-5-asserts-bridge</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.1</version>
 
     <name>junit4-5-asserts-bridge</name>
     <description>A simple junit4-5-asserts-bridge.</description>
