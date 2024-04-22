@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Assertions;
  * https://github.com/junit-team/junit4/blob/main/src/main/java/org/junit/Assert.java and moves the
  * message parameter, if any, to the last parameter location.
  */
-public class Asserts {
+public class Assert {
   /** Private constructor, so the class is not accidentally instantiated. */
-  private Asserts() {
+  private Assert() {
     // Do not instantiate.
   }
 

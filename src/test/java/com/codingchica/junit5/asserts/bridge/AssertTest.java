@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.opentest4j.AssertionFailedError;
 
 /** Unit tests for the Asserts class. */
-class AssertsTest {
+class AssertTest {
   private static final String MESSAGE = "My message goes here";
   private static final Object OBJECT1 = "Object 1 goes here";
   private static final Object OBJECT2 = "Object 2 goes here";
@@ -74,7 +74,7 @@ class AssertsTest {
       @Test
       void assertTrue_whenInvokedWithTrue_thenThrowsNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertTrue(MESSAGE, true);
+        Executable executable = () -> Assert.assertTrue(MESSAGE, true);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -83,7 +83,7 @@ class AssertsTest {
       @Test
       void assertTrue_whenInvokedWithFalse_thenThrowsException() {
         // Execution
-        Executable executable = () -> Asserts.assertTrue(MESSAGE, false);
+        Executable executable = () -> Assert.assertTrue(MESSAGE, false);
 
         // Validation
         AssertionFailedError exception =
@@ -98,7 +98,7 @@ class AssertsTest {
       @Test
       void assertTrue_whenInvokedWithTrue_thenThrowsNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertTrue(true);
+        Executable executable = () -> Assert.assertTrue(true);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -107,7 +107,7 @@ class AssertsTest {
       @Test
       void assertTrue_whenInvokedWithFalse_thenThrowsException() {
         // Execution
-        Executable executable = () -> Asserts.assertTrue(false);
+        Executable executable = () -> Assert.assertTrue(false);
 
         // Validation
         AssertionFailedError exception =
@@ -124,7 +124,7 @@ class AssertsTest {
       @Test
       void assertFalse_whenInvokedWithFalse_thenThrowsNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertFalse(MESSAGE, false);
+        Executable executable = () -> Assert.assertFalse(MESSAGE, false);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -133,7 +133,7 @@ class AssertsTest {
       @Test
       void assertFalse_whenInvokedWithTrue_thenThrowsException() {
         // Execution
-        Executable executable = () -> Asserts.assertFalse(MESSAGE, true);
+        Executable executable = () -> Assert.assertFalse(MESSAGE, true);
 
         // Validation
         AssertionFailedError exception =
@@ -148,7 +148,7 @@ class AssertsTest {
       @Test
       void assertFalse_whenInvokedWithFalse_thenThrowsNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertFalse(false);
+        Executable executable = () -> Assert.assertFalse(false);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -157,7 +157,7 @@ class AssertsTest {
       @Test
       void assertFalse_whenInvokedWithTrue_thenThrowsException() {
         // Execution
-        Executable executable = () -> Asserts.assertFalse(true);
+        Executable executable = () -> Assert.assertFalse(true);
 
         // Validation
         AssertionFailedError exception =
@@ -175,7 +175,7 @@ class AssertsTest {
       @Test
       void fail_whenInvoked_thenThrowsException() {
         // Execution
-        Executable executable = () -> Asserts.fail(MESSAGE);
+        Executable executable = () -> Assert.fail(MESSAGE);
 
         // Validation
         AssertionFailedError exception =
@@ -191,7 +191,7 @@ class AssertsTest {
       @NullSource
       void fail_whenInvoked_thenThrowsException(String message) {
         // Execution
-        Executable executable = Asserts::fail;
+        Executable executable = Assert::fail;
 
         // Validation
         AssertionFailedError exception =
@@ -209,7 +209,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(OBJECT1, OBJECT1);
+        Executable executable = () -> Assert.assertEquals(OBJECT1, OBJECT1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -218,7 +218,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenNotEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(OBJECT1, OBJECT2);
+        Executable executable = () -> Assert.assertEquals(OBJECT1, OBJECT2);
 
         // Validation
         AssertionFailedError exception =
@@ -235,7 +235,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(MESSAGE, OBJECT1, OBJECT1);
+        Executable executable = () -> Assert.assertEquals(MESSAGE, OBJECT1, OBJECT1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -244,7 +244,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenNotEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(MESSAGE, OBJECT1, OBJECT2);
+        Executable executable = () -> Assert.assertEquals(MESSAGE, OBJECT1, OBJECT2);
 
         // Validation
         AssertionFailedError exception =
@@ -261,7 +261,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(MESSAGE, OBJECTS1, OBJECTS1);
+        Executable executable = () -> Assert.assertEquals(MESSAGE, OBJECTS1, OBJECTS1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -270,7 +270,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenNotEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(MESSAGE, OBJECTS1, OBJECTS2);
+        Executable executable = () -> Assert.assertEquals(MESSAGE, OBJECTS1, OBJECTS2);
 
         // Validation
         AssertionFailedError exception =
@@ -287,7 +287,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(OBJECTS1, OBJECTS1);
+        Executable executable = () -> Assert.assertEquals(OBJECTS1, OBJECTS1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -296,7 +296,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenNotEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(OBJECTS1, OBJECTS2);
+        Executable executable = () -> Assert.assertEquals(OBJECTS1, OBJECTS2);
 
         // Validation
         AssertionFailedError exception =
@@ -312,7 +312,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(MESSAGE, LONG1, LONG1);
+        Executable executable = () -> Assert.assertEquals(MESSAGE, LONG1, LONG1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -321,7 +321,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenNotEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(MESSAGE, LONG1, LONG2);
+        Executable executable = () -> Assert.assertEquals(MESSAGE, LONG1, LONG2);
 
         // Validation
         AssertionFailedError exception =
@@ -338,7 +338,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(LONG1, LONG1);
+        Executable executable = () -> Assert.assertEquals(LONG1, LONG1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -347,7 +347,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenNotEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(LONG1, LONG2);
+        Executable executable = () -> Assert.assertEquals(LONG1, LONG2);
 
         // Validation
         AssertionFailedError exception =
@@ -363,7 +363,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(MESSAGE, DOUBLE1, DOUBLE1, DOUBLE_DELTA);
+        Executable executable = () -> Assert.assertEquals(MESSAGE, DOUBLE1, DOUBLE1, DOUBLE_DELTA);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -372,7 +372,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenNotEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(MESSAGE, DOUBLE1, DOUBLE2, DOUBLE_DELTA);
+        Executable executable = () -> Assert.assertEquals(MESSAGE, DOUBLE1, DOUBLE2, DOUBLE_DELTA);
 
         // Validation
         AssertionFailedError exception =
@@ -389,7 +389,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(DOUBLE1, DOUBLE1, DOUBLE_DELTA);
+        Executable executable = () -> Assert.assertEquals(DOUBLE1, DOUBLE1, DOUBLE_DELTA);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -398,7 +398,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenNotEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(DOUBLE1, DOUBLE2, DOUBLE_DELTA);
+        Executable executable = () -> Assert.assertEquals(DOUBLE1, DOUBLE2, DOUBLE_DELTA);
 
         // Validation
         AssertionFailedError exception =
@@ -415,7 +415,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(DOUBLE1, DOUBLE1);
+        Executable executable = () -> Assert.assertEquals(DOUBLE1, DOUBLE1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -424,7 +424,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenNotEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(DOUBLE1, DOUBLE2);
+        Executable executable = () -> Assert.assertEquals(DOUBLE1, DOUBLE2);
 
         // Validation
         AssertionFailedError exception =
@@ -441,7 +441,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(MESSAGE, FLOAT1, FLOAT1, FLOAT_DELTA);
+        Executable executable = () -> Assert.assertEquals(MESSAGE, FLOAT1, FLOAT1, FLOAT_DELTA);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -450,7 +450,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenNotEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(MESSAGE, FLOAT1, FLOAT2, FLOAT_DELTA);
+        Executable executable = () -> Assert.assertEquals(MESSAGE, FLOAT1, FLOAT2, FLOAT_DELTA);
 
         // Validation
         AssertionFailedError exception =
@@ -467,7 +467,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(MESSAGE, FLOAT1, FLOAT1);
+        Executable executable = () -> Assert.assertEquals(MESSAGE, FLOAT1, FLOAT1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -476,7 +476,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenNotEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(MESSAGE, FLOAT1, FLOAT2);
+        Executable executable = () -> Assert.assertEquals(MESSAGE, FLOAT1, FLOAT2);
 
         // Validation
         AssertionFailedError exception =
@@ -491,7 +491,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(FLOAT1, FLOAT1, FLOAT_DELTA);
+        Executable executable = () -> Assert.assertEquals(FLOAT1, FLOAT1, FLOAT_DELTA);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -500,7 +500,7 @@ class AssertsTest {
       @Test
       void assertEquals_whenNotEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(FLOAT1, FLOAT2, FLOAT_DELTA);
+        Executable executable = () -> Assert.assertEquals(FLOAT1, FLOAT2, FLOAT_DELTA);
 
         // Validation
         AssertionFailedError exception =
@@ -520,7 +520,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenNotEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(MESSAGE, OBJECT1, OBJECT2);
+        Executable executable = () -> Assert.assertNotEquals(MESSAGE, OBJECT1, OBJECT2);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -529,7 +529,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(MESSAGE, OBJECT1, OBJECT1);
+        Executable executable = () -> Assert.assertNotEquals(MESSAGE, OBJECT1, OBJECT1);
 
         // Validation
         AssertionFailedError exception =
@@ -546,7 +546,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenNotEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(MESSAGE, LONG1, LONG2);
+        Executable executable = () -> Assert.assertNotEquals(MESSAGE, LONG1, LONG2);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -555,7 +555,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(MESSAGE, LONG1, LONG1);
+        Executable executable = () -> Assert.assertNotEquals(MESSAGE, LONG1, LONG1);
 
         // Validation
         AssertionFailedError exception =
@@ -572,7 +572,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenNotEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(MESSAGE, DOUBLE1, DOUBLE2);
+        Executable executable = () -> Assert.assertNotEquals(MESSAGE, DOUBLE1, DOUBLE2);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -581,7 +581,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(MESSAGE, DOUBLE1, DOUBLE1);
+        Executable executable = () -> Assert.assertNotEquals(MESSAGE, DOUBLE1, DOUBLE1);
 
         // Validation
         AssertionFailedError exception =
@@ -598,7 +598,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenNotEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(MESSAGE, FLOAT1, FLOAT2);
+        Executable executable = () -> Assert.assertNotEquals(MESSAGE, FLOAT1, FLOAT2);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -607,7 +607,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(MESSAGE, FLOAT1, FLOAT1);
+        Executable executable = () -> Assert.assertNotEquals(MESSAGE, FLOAT1, FLOAT1);
 
         // Validation
         AssertionFailedError exception =
@@ -625,7 +625,7 @@ class AssertsTest {
       void assertNotEquals_whenNotEquals_thenNoException() {
         // Execution
         Executable executable =
-            () -> Asserts.assertNotEquals(MESSAGE, DOUBLE1, DOUBLE2, DOUBLE_DELTA);
+            () -> Assert.assertNotEquals(MESSAGE, DOUBLE1, DOUBLE2, DOUBLE_DELTA);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -635,7 +635,7 @@ class AssertsTest {
       void assertNotEquals_whenEquals_thenException() {
         // Execution
         Executable executable =
-            () -> Asserts.assertNotEquals(MESSAGE, DOUBLE1, DOUBLE1, DOUBLE_DELTA);
+            () -> Assert.assertNotEquals(MESSAGE, DOUBLE1, DOUBLE1, DOUBLE_DELTA);
 
         // Validation
         AssertionFailedError exception =
@@ -652,7 +652,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenNotEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(OBJECT1, OBJECT2);
+        Executable executable = () -> Assert.assertNotEquals(OBJECT1, OBJECT2);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -661,7 +661,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(OBJECT1, OBJECT1);
+        Executable executable = () -> Assert.assertNotEquals(OBJECT1, OBJECT1);
 
         // Validation
         AssertionFailedError exception =
@@ -677,7 +677,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenNotEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(DOUBLE1, DOUBLE2);
+        Executable executable = () -> Assert.assertNotEquals(DOUBLE1, DOUBLE2);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -686,7 +686,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(DOUBLE1, DOUBLE1);
+        Executable executable = () -> Assert.assertNotEquals(DOUBLE1, DOUBLE1);
 
         // Validation
         AssertionFailedError exception =
@@ -702,7 +702,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenNotEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(DOUBLE1, DOUBLE2, DOUBLE_DELTA);
+        Executable executable = () -> Assert.assertNotEquals(DOUBLE1, DOUBLE2, DOUBLE_DELTA);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -711,7 +711,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(DOUBLE1, DOUBLE1, DOUBLE_DELTA);
+        Executable executable = () -> Assert.assertNotEquals(DOUBLE1, DOUBLE1, DOUBLE_DELTA);
 
         // Validation
         AssertionFailedError exception =
@@ -727,7 +727,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenNotEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(FLOAT1, FLOAT2, FLOAT_DELTA);
+        Executable executable = () -> Assert.assertNotEquals(FLOAT1, FLOAT2, FLOAT_DELTA);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -736,7 +736,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(FLOAT1, FLOAT1, FLOAT_DELTA);
+        Executable executable = () -> Assert.assertNotEquals(FLOAT1, FLOAT1, FLOAT_DELTA);
 
         // Validation
         AssertionFailedError exception =
@@ -752,7 +752,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenNotEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(LONG1, LONG2);
+        Executable executable = () -> Assert.assertNotEquals(LONG1, LONG2);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -761,7 +761,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(LONG1, LONG1);
+        Executable executable = () -> Assert.assertNotEquals(LONG1, LONG1);
 
         // Validation
         AssertionFailedError exception =
@@ -777,7 +777,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenNotEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(FLOAT1, FLOAT2);
+        Executable executable = () -> Assert.assertNotEquals(FLOAT1, FLOAT2);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -786,7 +786,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(FLOAT1, FLOAT1);
+        Executable executable = () -> Assert.assertNotEquals(FLOAT1, FLOAT1);
 
         // Validation
         AssertionFailedError exception =
@@ -802,7 +802,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenNotEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(MESSAGE, FLOAT1, FLOAT2, FLOAT_DELTA);
+        Executable executable = () -> Assert.assertNotEquals(MESSAGE, FLOAT1, FLOAT2, FLOAT_DELTA);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -811,7 +811,7 @@ class AssertsTest {
       @Test
       void assertNotEquals_whenEquals_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotEquals(MESSAGE, FLOAT1, FLOAT1, FLOAT_DELTA);
+        Executable executable = () -> Assert.assertNotEquals(MESSAGE, FLOAT1, FLOAT1, FLOAT_DELTA);
 
         // Validation
         AssertionFailedError exception =
@@ -832,7 +832,7 @@ class AssertsTest {
       @Test
       void assertNull_whenNull_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNull(MESSAGE, null);
+        Executable executable = () -> Assert.assertNull(MESSAGE, null);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -841,7 +841,7 @@ class AssertsTest {
       @Test
       void assertNull_whenNotNull_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNull(MESSAGE, OBJECT1);
+        Executable executable = () -> Assert.assertNull(MESSAGE, OBJECT1);
 
         // Validation
         AssertionFailedError exception =
@@ -858,7 +858,7 @@ class AssertsTest {
       @Test
       void assertNull_whenNull_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNull(null);
+        Executable executable = () -> Assert.assertNull(null);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -867,7 +867,7 @@ class AssertsTest {
       @Test
       void assertNull_whenNotNull_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNull(OBJECT1);
+        Executable executable = () -> Assert.assertNull(OBJECT1);
 
         // Validation
         AssertionFailedError exception =
@@ -887,7 +887,7 @@ class AssertsTest {
       @Test
       void assertNotNull_whenNotNull_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotNull(OBJECT1);
+        Executable executable = () -> Assert.assertNotNull(OBJECT1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -896,7 +896,7 @@ class AssertsTest {
       @Test
       void assertNotNull_whenNull_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotNull(null);
+        Executable executable = () -> Assert.assertNotNull(null);
 
         // Validation
         AssertionFailedError exception =
@@ -911,7 +911,7 @@ class AssertsTest {
       @Test
       void assertNotNull_whenNotNull_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotNull(MESSAGE, OBJECT1);
+        Executable executable = () -> Assert.assertNotNull(MESSAGE, OBJECT1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -920,7 +920,7 @@ class AssertsTest {
       @Test
       void assertNotNull_whenNull_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotNull(MESSAGE, null);
+        Executable executable = () -> Assert.assertNotNull(MESSAGE, null);
 
         // Validation
         AssertionFailedError exception =
@@ -939,7 +939,7 @@ class AssertsTest {
       @Test
       void assertSame_whenSame_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertSame(MESSAGE, OBJECT1, OBJECT1);
+        Executable executable = () -> Assert.assertSame(MESSAGE, OBJECT1, OBJECT1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -948,7 +948,7 @@ class AssertsTest {
       @Test
       void assertSame_whenNotSame_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertEquals(MESSAGE, OBJECT1, OBJECT2);
+        Executable executable = () -> Assert.assertEquals(MESSAGE, OBJECT1, OBJECT2);
 
         // Validation
         AssertionFailedError exception =
@@ -965,7 +965,7 @@ class AssertsTest {
       @Test
       void assertSame_whenSame_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertSame(OBJECT1, OBJECT1);
+        Executable executable = () -> Assert.assertSame(OBJECT1, OBJECT1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -974,7 +974,7 @@ class AssertsTest {
       @Test
       void assertSame_whenNotSame_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertSame(OBJECT1, OBJECT2);
+        Executable executable = () -> Assert.assertSame(OBJECT1, OBJECT2);
 
         // Validation
         AssertionFailedError exception =
@@ -995,7 +995,7 @@ class AssertsTest {
       @Test
       void assertNotSame_whenNotSame_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotSame(MESSAGE, OBJECT1, OBJECT2);
+        Executable executable = () -> Assert.assertNotSame(MESSAGE, OBJECT1, OBJECT2);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1004,7 +1004,7 @@ class AssertsTest {
       @Test
       void assertNotSame_whenSame_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotSame(MESSAGE, OBJECT1, OBJECT1);
+        Executable executable = () -> Assert.assertNotSame(MESSAGE, OBJECT1, OBJECT1);
 
         // Validation
         AssertionFailedError exception =
@@ -1021,7 +1021,7 @@ class AssertsTest {
       @Test
       void assertNotSame_whenNotSame_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotSame(OBJECT1, OBJECT2);
+        Executable executable = () -> Assert.assertNotSame(OBJECT1, OBJECT2);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1030,7 +1030,7 @@ class AssertsTest {
       @Test
       void assertNotSame_whenSame_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertNotSame(OBJECT1, OBJECT1);
+        Executable executable = () -> Assert.assertNotSame(OBJECT1, OBJECT1);
 
         // Validation
         AssertionFailedError exception =
@@ -1048,7 +1048,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(OBJECTS1, OBJECTS1);
+        Executable executable = () -> Assert.assertArrayEquals(OBJECTS1, OBJECTS1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1057,7 +1057,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(OBJECTS1, OBJECTS2);
+        Executable executable = () -> Assert.assertArrayEquals(OBJECTS1, OBJECTS2);
 
         // Validation
         AssertionFailedError exception =
@@ -1072,7 +1072,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(MESSAGE, OBJECTS1, OBJECTS1);
+        Executable executable = () -> Assert.assertArrayEquals(MESSAGE, OBJECTS1, OBJECTS1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1081,7 +1081,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(MESSAGE, OBJECTS1, OBJECTS2);
+        Executable executable = () -> Assert.assertArrayEquals(MESSAGE, OBJECTS1, OBJECTS2);
 
         // Validation
         AssertionFailedError exception =
@@ -1097,7 +1097,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(BOOLEANS1, BOOLEANS1);
+        Executable executable = () -> Assert.assertArrayEquals(BOOLEANS1, BOOLEANS1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1106,7 +1106,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(BOOLEANS1, BOOLEANS2);
+        Executable executable = () -> Assert.assertArrayEquals(BOOLEANS1, BOOLEANS2);
 
         // Validation
         AssertionFailedError exception =
@@ -1121,7 +1121,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(MESSAGE, BOOLEANS1, BOOLEANS1);
+        Executable executable = () -> Assert.assertArrayEquals(MESSAGE, BOOLEANS1, BOOLEANS1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1130,7 +1130,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(MESSAGE, BOOLEANS1, BOOLEANS2);
+        Executable executable = () -> Assert.assertArrayEquals(MESSAGE, BOOLEANS1, BOOLEANS2);
 
         // Validation
         AssertionFailedError exception =
@@ -1146,7 +1146,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(MESSAGE, BYTES1, BYTES1);
+        Executable executable = () -> Assert.assertArrayEquals(MESSAGE, BYTES1, BYTES1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1155,7 +1155,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(MESSAGE, BYTES1, BYTES2);
+        Executable executable = () -> Assert.assertArrayEquals(MESSAGE, BYTES1, BYTES2);
 
         // Validation
         AssertionFailedError exception =
@@ -1171,7 +1171,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(BYTES1, BYTES1);
+        Executable executable = () -> Assert.assertArrayEquals(BYTES1, BYTES1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1180,7 +1180,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(BYTES1, BYTES2);
+        Executable executable = () -> Assert.assertArrayEquals(BYTES1, BYTES2);
 
         // Validation
         AssertionFailedError exception =
@@ -1195,7 +1195,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(CHARS1, CHARS1);
+        Executable executable = () -> Assert.assertArrayEquals(CHARS1, CHARS1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1204,7 +1204,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(CHARS1, CHARS2);
+        Executable executable = () -> Assert.assertArrayEquals(CHARS1, CHARS2);
 
         // Validation
         AssertionFailedError exception =
@@ -1219,7 +1219,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(MESSAGE, CHARS1, CHARS1);
+        Executable executable = () -> Assert.assertArrayEquals(MESSAGE, CHARS1, CHARS1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1228,7 +1228,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(MESSAGE, CHARS1, CHARS2);
+        Executable executable = () -> Assert.assertArrayEquals(MESSAGE, CHARS1, CHARS2);
 
         // Validation
         AssertionFailedError exception =
@@ -1244,7 +1244,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(SHORTS1, SHORTS1);
+        Executable executable = () -> Assert.assertArrayEquals(SHORTS1, SHORTS1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1253,7 +1253,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(SHORTS1, SHORTS2);
+        Executable executable = () -> Assert.assertArrayEquals(SHORTS1, SHORTS2);
 
         // Validation
         AssertionFailedError exception =
@@ -1268,7 +1268,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(MESSAGE, SHORTS1, SHORTS1);
+        Executable executable = () -> Assert.assertArrayEquals(MESSAGE, SHORTS1, SHORTS1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1277,7 +1277,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(MESSAGE, SHORTS1, SHORTS2);
+        Executable executable = () -> Assert.assertArrayEquals(MESSAGE, SHORTS1, SHORTS2);
 
         // Validation
         AssertionFailedError exception =
@@ -1293,7 +1293,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(INTS1, INTS1);
+        Executable executable = () -> Assert.assertArrayEquals(INTS1, INTS1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1302,7 +1302,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(INTS1, INTS2);
+        Executable executable = () -> Assert.assertArrayEquals(INTS1, INTS2);
 
         // Validation
         AssertionFailedError exception =
@@ -1317,7 +1317,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(MESSAGE, INTS1, INTS1);
+        Executable executable = () -> Assert.assertArrayEquals(MESSAGE, INTS1, INTS1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1326,7 +1326,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(MESSAGE, INTS1, INTS2);
+        Executable executable = () -> Assert.assertArrayEquals(MESSAGE, INTS1, INTS2);
 
         // Validation
         AssertionFailedError exception =
@@ -1342,7 +1342,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(LONGS1, LONGS1);
+        Executable executable = () -> Assert.assertArrayEquals(LONGS1, LONGS1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1351,7 +1351,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(LONGS1, LONGS2);
+        Executable executable = () -> Assert.assertArrayEquals(LONGS1, LONGS2);
 
         // Validation
         AssertionFailedError exception =
@@ -1366,7 +1366,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(MESSAGE, LONGS1, LONGS1);
+        Executable executable = () -> Assert.assertArrayEquals(MESSAGE, LONGS1, LONGS1);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1375,7 +1375,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(MESSAGE, LONGS1, LONGS2);
+        Executable executable = () -> Assert.assertArrayEquals(MESSAGE, LONGS1, LONGS2);
 
         // Validation
         AssertionFailedError exception =
@@ -1391,7 +1391,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(DOUBLES1, DOUBLES1, DOUBLE_DELTA);
+        Executable executable = () -> Assert.assertArrayEquals(DOUBLES1, DOUBLES1, DOUBLE_DELTA);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1400,7 +1400,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(DOUBLES1, DOUBLES2, DOUBLE_DELTA);
+        Executable executable = () -> Assert.assertArrayEquals(DOUBLES1, DOUBLES2, DOUBLE_DELTA);
 
         // Validation
         AssertionFailedError exception =
@@ -1416,7 +1416,7 @@ class AssertsTest {
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
         Executable executable =
-            () -> Asserts.assertArrayEquals(MESSAGE, DOUBLES1, DOUBLES1, DOUBLE_DELTA);
+            () -> Assert.assertArrayEquals(MESSAGE, DOUBLES1, DOUBLES1, DOUBLE_DELTA);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1426,7 +1426,7 @@ class AssertsTest {
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
         Executable executable =
-            () -> Asserts.assertArrayEquals(MESSAGE, DOUBLES1, DOUBLES2, DOUBLE_DELTA);
+            () -> Assert.assertArrayEquals(MESSAGE, DOUBLES1, DOUBLES2, DOUBLE_DELTA);
 
         // Validation
         AssertionFailedError exception =
@@ -1442,7 +1442,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(FLOATS1, FLOATS1, FLOAT_DELTA);
+        Executable executable = () -> Assert.assertArrayEquals(FLOATS1, FLOATS1, FLOAT_DELTA);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1451,7 +1451,7 @@ class AssertsTest {
       @Test
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
-        Executable executable = () -> Asserts.assertArrayEquals(FLOATS1, FLOATS2, FLOAT_DELTA);
+        Executable executable = () -> Assert.assertArrayEquals(FLOATS1, FLOATS2, FLOAT_DELTA);
 
         // Validation
         AssertionFailedError exception =
@@ -1467,7 +1467,7 @@ class AssertsTest {
       void assertArrayEquals_whenEquals_thenNoException() {
         // Execution
         Executable executable =
-            () -> Asserts.assertArrayEquals(MESSAGE, FLOATS1, FLOATS1, FLOAT_DELTA);
+            () -> Assert.assertArrayEquals(MESSAGE, FLOATS1, FLOATS1, FLOAT_DELTA);
 
         // Validation
         Assertions.assertDoesNotThrow(executable);
@@ -1477,7 +1477,7 @@ class AssertsTest {
       void assertArrayEquals_whenNotEqual_thenException() {
         // Execution
         Executable executable =
-            () -> Asserts.assertArrayEquals(MESSAGE, FLOATS1, FLOATS2, FLOAT_DELTA);
+            () -> Assert.assertArrayEquals(MESSAGE, FLOATS1, FLOATS2, FLOAT_DELTA);
 
         // Validation
         AssertionFailedError exception =
